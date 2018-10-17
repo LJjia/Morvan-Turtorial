@@ -191,3 +191,27 @@ $ git clone  https://github.com/johnzeng/ResumableGitClone.git
 $ git clone --depth 1 https://github.com/johnzeng/ResumableGitClone.git
 上面这句话含义为只拷贝最新的一次修改记录
 
+如果在git push origin master 的时候 遇到如下报错
+error: src refspec matser does not match any.
+error: failed to push some refs to 'https://github.com/LJjia/Morvan-Turtorial.git'
+
+可以尝试先git pull origin master
+之后再使用git push origin master
+当远程库未改动，而本地仓库改动时，git pull 回来的代码，不会改动你新增的行，代码，或者文件。
+只会在把远程库中代码所在的行数给覆盖掉
+
+当然有更好的方法，可以参见博客
+https://blog.csdn.net/Thanksgining/article/details/42121751
+使用方法简介：
+暂存你的修改：比如，你本地的代码比网上的代码库新一个版本
+首先，存储你这个新版本的所有改动
+git add .
+接着用git stash把这些改动搁置。（相当于压入栈中）
+git stash
+需要找回之前搁置的改动继续先前的工作了？
+git stash apply 即可。
+也可以用 git stash list 来查看所有的搁置版本（可能搁置了很多次，最好不要这样，容易搞混）
+在出现一个搁置栈的情况下，比如如果你想找回栈中的第2个，可以用 git stash apply stash@{1}
+如果想找回第1个，可以用 git stash pop
+如果想删除一个stash，git stash drop <id>
+删除所有stash，git stash clear
